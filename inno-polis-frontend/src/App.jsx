@@ -9,7 +9,7 @@ import TopicsTab from './components/TopicsTab';
 import StatementsTab from './components/StatementsTab';
 import VoteTab from './components/VoteTab';
 import ReportTab from './components/ReportTab';
-import { styles } from './components/styles';
+import './styles.css';
 
 function PolisClone() {
   const [topics, setTopics] = useState([]);
@@ -130,8 +130,6 @@ function PolisClone() {
               />
             )}
           </div>
-
-          <style jsx>{styles}</style>
         </WalletServicesProvider>
       </Web3AuthProvider>
     </div>
