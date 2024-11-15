@@ -2,7 +2,7 @@ import Web3 from "web3";
 import {conversationFactoryABI} from "../config/abi";
 import {addr} from "../config/const"
 
-export const addTopicService = async (newTopic, topics, provider) => {
+export const addTopicService = async (newTopic, newDescription, topics, provider) => {
   if (!newTopic.trim()) {
     return null;
   }
@@ -16,7 +16,7 @@ export const addTopicService = async (newTopic, topics, provider) => {
     const contract = new web3.eth.Contract(conversationFactoryABI, addr);
     // Define the parameters for the createConversation function
     const title = newTopic.trim();
-    const description = "Test Description";
+    const description = newDescription.trim();
     const authManager = "0x0000000000000000000000000000000000000000"; // Replace with actual address
     const duration = 60*60*24*3; // Example duration in seconds
 

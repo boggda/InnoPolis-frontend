@@ -28,7 +28,9 @@ function PolisClone() {
     addTopic,
     addStatement,
     vote,
-    generateReport
+    generateReport,
+    newDescription,
+    setNewDescription
   } = usePolisActions();
 
   
@@ -54,6 +56,8 @@ function PolisClone() {
               <TopicsTab 
                 newTopic={newTopic}
                 setNewTopic={setNewTopic}
+                newDescription={newDescription}
+                setNewDescription={setNewDescription}
                 addTopic={addTopic}
                 topics={topics}
               />

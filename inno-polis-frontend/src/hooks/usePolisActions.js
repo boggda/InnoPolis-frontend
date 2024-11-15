@@ -12,10 +12,11 @@ export const usePolisActions = () => {
   const [newStatement, setNewStatement] = useState('');
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [currentStatementIndex, setCurrentStatementIndex] = useState(0);
+  const [newDescription, setNewDescription] = useState('');
   const [activeTab, setActiveTab] = useState('topics');
 
   const addTopic = async (provider) => {
-    const topic = await addTopicService(newTopic, topics, provider);
+    const topic = await addTopicService(newTopic, newDescription, topics, provider);
     if (topic) {
       setTopics([...topics, topic]);
       setNewTopic('');
@@ -80,6 +81,8 @@ export const usePolisActions = () => {
     addTopic,
     addStatement,
     vote,
-    generateReport
+    generateReport,
+    newDescription,
+    setNewDescription
   };
 }; 
