@@ -7,6 +7,9 @@ export const addTopicService = async (newTopic, newDescription, topics, provider
     return null;
   }
 
+
+  let topic;
+  let result;
   try {
     console.log(provider);
     const web3 = new Web3(provider);
@@ -21,30 +24,32 @@ export const addTopicService = async (newTopic, newDescription, topics, provider
     const duration = 60*60*24*3; // Example duration in seconds
 
     // Encode the function call
-    const data = contract.methods.createConversation(title, description, authManager, duration).encodeABI();
+    const data = contract.methods.createConversation(title, description, authManager, duration).call();
 
-    const amount = 0;
-    let transaction = {
-      from: fromAddress,
-      to: addr,
-      data: data,
-      value: amount
-    }
 
-    // calculate gas transaction before sending
-    transaction = { ...transaction, gas: await web3.eth.estimateGas(transaction) };
+    contract.methods.createConversation(title, description, authManager, duration)
+      .send({from: fromAddress, value: 0})
+      .on('transactionHash', (hash) => {
+          console.log('Transaction Hash:', hash);
+      })
+      .on('receipt', (receipt) => {
+          console.log('Transaction Receipt:', receipt);
+      })
+      .on('error', (error) => {
+          console.error('Transaction Error:', error);
+      });
 
-    // Submit transaction to the blockchain and wait for it to be mined
-    const receipt = await web3.eth.sendTransaction(transaction);
+      const contractAddr = await contract.methods.createConversation(title, description, authManager, duration)
+        .call({from: fromAddress});
 
-    return JSON.stringify(receipt, (key, value) =>
-      typeof value === 'bigint'
-        ? value.toString()
-        : value // return everything else unchanged
-    );
+      topic = {
+        id: Date.now(),
+        title: newTopic,
+        description: newDescription,
+        contractAddr: contractAddr
+      };
+      return topic;
   } catch (error) {
     console.log(error);
   }
-
-  return 0;
 }; 

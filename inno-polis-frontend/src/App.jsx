@@ -37,7 +37,7 @@ function PolisClone() {
 
   return (
     <div className="polis-clone">
-      <h1>Pol.is Clone</h1>
+      <h1>InnoPolis</h1>
       <Web3AuthProvider config={web3AuthContextConfig}>
         <WalletServicesProvider context={Web3AuthInnerContext}>
           <ConnectWeb3AuthButton />
@@ -46,8 +46,7 @@ function PolisClone() {
 
           <div className="tabs">
             <button className={activeTab === 'topics' ? 'active' : ''} onClick={() => setActiveTab('topics')}>Topics</button>
-            <button className={activeTab === 'statements' ? 'active' : ''} onClick={() => setActiveTab('statements')}>Statements</button>
-            <button className={activeTab === 'vote' ? 'active' : ''} onClick={() => setActiveTab('vote')}>Vote</button>
+            <button className={activeTab === 'statements' ? 'active' : ''} onClick={() => setActiveTab('statements')}>Statements & Votes</button>
             <button className={activeTab === 'report' ? 'active' : ''} onClick={() => setActiveTab('report')}>Report</button>
           </div>
 
@@ -64,23 +63,22 @@ function PolisClone() {
             )}
 
             {activeTab === 'statements' && (
-              <StatementsTab 
-                selectedTopic={selectedTopic}
-                setSelectedTopic={setSelectedTopic}
-                newStatement={newStatement}
-                setNewStatement={setNewStatement}
-                addStatement={addStatement}
-                statements={statements}
-                topics={topics}
-              />
-            )}
-
-            {activeTab === 'vote' && (
-              <VoteTab 
-                currentStatementIndex={currentStatementIndex}
-                statements={statements}
-                vote={vote}
-              />
+              <div>
+                <StatementsTab 
+                  selectedTopic={selectedTopic}
+                  setSelectedTopic={setSelectedTopic}
+                  newStatement={newStatement}
+                  setNewStatement={setNewStatement}
+                  addStatement={addStatement}
+                  statements={statements}
+                  topics={topics}
+                />
+                <VoteTab 
+                  currentStatementIndex={currentStatementIndex}
+                  statements={statements}
+                  vote={vote}
+                />
+              </div>
             )}
 
             {activeTab === 'report' && (

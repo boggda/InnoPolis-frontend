@@ -26,6 +26,7 @@ const TopicsTab = ({ newTopic, setNewTopic, newDescription, setNewDescription, a
         {topics.map(topic => (
           <div key={topic.id} className="topic-card">
             <h3>{topic.title}</h3>
+            <h4>{topic.contractAddr}</h4>
             <p>{topic.description}</p>
           </div>
         ))}
