@@ -1,6 +1,6 @@
 import Web3 from "web3";
 import {conversationFactoryABI} from "../config/abi";
-import addr from "../config/const"
+import {addr} from "../config/const"
 
 export const addTopicService = async (newTopic, topics, provider) => {
   if (!newTopic.trim()) {
