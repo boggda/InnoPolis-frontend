@@ -31,6 +31,8 @@ function PolisClone() {
     generateReport
   } = usePolisActions();
 
+  
+
   return (
     <div className="polis-clone">
       <h1>Pol.is Clone</h1>

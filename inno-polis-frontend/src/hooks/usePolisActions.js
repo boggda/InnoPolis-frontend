@@ -4,6 +4,7 @@ import { addStatementService } from '../services/statementService';
 import { processVoteService } from '../services/voteService';
 import { generateReportService } from '../services/reportService';
 
+
 export const usePolisActions = () => {
   const [topics, setTopics] = useState([]);
   const [statements, setStatements] = useState([]);
@@ -13,8 +14,8 @@ export const usePolisActions = () => {
   const [currentStatementIndex, setCurrentStatementIndex] = useState(0);
   const [activeTab, setActiveTab] = useState('topics');
 
-  const addTopic = async () => {
-    const topic = await addTopicService(newTopic, topics);
+  const addTopic = async (provider) => {
+    const topic = await addTopicService(newTopic, topics, provider);
     if (topic) {
       setTopics([...topics, topic]);
       setNewTopic('');
