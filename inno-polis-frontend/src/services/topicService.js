@@ -14,6 +14,7 @@ export const addTopicService = async (newTopic, newDescription, topics, provider
     console.log(provider);
     const web3 = new Web3(provider);
     // Get user's Ethereum public address
+    //console.log(await web3.eth.getAccounts());
     const fromAddress = (await web3.eth.getAccounts())[0];
 
     const contract = new web3.eth.Contract(conversationFactoryABI, factoryAddr);

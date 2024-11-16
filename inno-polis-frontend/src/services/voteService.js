@@ -4,8 +4,11 @@ import {conversationABI} from "../config/abi";
 export const processVoteService = async (voteArray, conversationAddress, provider) => {
   try {
     const web3 = new Web3(provider);
-    const fromAddress = (await web3.eth.getAccounts())[0];
 
+    web3.eth.requestAccounts().then(console.log);
+
+    const fromAddress = (await web3.eth.getAccounts())[0];
+    
     // Create contract instance
     const contract = new web3.eth.Contract(conversationABI, conversationAddress);
     
@@ -20,10 +23,11 @@ export const processVoteService = async (voteArray, conversationAddress, provide
       return encodedCall;
     });
 
+    console.log('address', fromAddress);
     // Encode the multicall function
     return new Promise((resolve, reject) => {
       contract.methods.multicall(calls)
-        .send({ from: fromAddress })
+        .send({ from: fromAddress, value: 0})
         .on('transactionHash', (hash) => {
           console.log('Vote Transaction Hash:', hash);
         })

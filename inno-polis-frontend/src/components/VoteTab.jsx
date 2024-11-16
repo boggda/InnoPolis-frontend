@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { useWeb3Auth } from "@web3auth/modal-react-hooks";
 
 const VoteTab = ({ currentStatementIndex, statements, vote, addVote }) => {
   const [voteArray, setVoteArray] = useState([]);
-
-  
+  const {isConnected, connect, addAndSwitchChain, userInfo, provider, web3Auth, authenticateUser } = useWeb3Auth();
 
   return (
     <div className="vote">
@@ -23,7 +23,7 @@ const VoteTab = ({ currentStatementIndex, statements, vote, addVote }) => {
       )}
       <button 
         className="submit-votes-button"
-        onClick={() => vote()}
+        onClick={() => vote(provider)}
       >
         Submit All Votes
       </button>
