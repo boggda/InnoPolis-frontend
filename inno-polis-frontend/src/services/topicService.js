@@ -1,6 +1,6 @@
 import Web3 from "web3";
 import {conversationFactoryABI} from "../config/abi";
-import {addr} from "../config/const"
+import {factoryAddr} from "../config/const"
 
 export const addTopicService = async (newTopic, newDescription, topics, provider) => {
   if (!newTopic.trim()) {
@@ -16,7 +16,7 @@ export const addTopicService = async (newTopic, newDescription, topics, provider
     // Get user's Ethereum public address
     const fromAddress = (await web3.eth.getAccounts())[0];
 
-    const contract = new web3.eth.Contract(conversationFactoryABI, addr);
+    const contract = new web3.eth.Contract(conversationFactoryABI, factoryAddr);
     // Define the parameters for the createConversation function
     const title = newTopic.trim();
     const description = newDescription.trim();

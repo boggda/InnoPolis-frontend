@@ -64,7 +64,7 @@ const StatementsTab = ({ selectedTopic, setSelectedTopic, newStatement, setNewSt
           onChange={(e) => setNewStatement(e.target.value)}
           placeholder="Enter a new statement"
         />
-        <button onClick={addStatement}>Add Statement</button>
+        <button onClick={() => addStatement(provider)}>Add Statement</button>
       </div>
       <div className="statement-list">
         {statements.map(statement => (
