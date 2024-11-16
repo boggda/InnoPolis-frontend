@@ -24,16 +24,15 @@ const StatementsTab = ({ selectedTopic, setSelectedTopic, newStatement, setNewSt
 
         for (let i = 0; i < statementsCount; i++) {
           const statement = await topicContract.methods.statements(i).call();
-          fetchedStatements.push({
-            id: i,
-            content: statement.content,
-            topicId: selectedTopic,
-            votes: {
-              agree: 0,
-              disagree: 0,
-              skip: 0
-            }
-          });
+          const vote = await topicContract.methods.votes(i, fromAddress).call();
+          console.log(vote);
+          if (vote < 1) {
+            fetchedStatements.push({
+              id: i,
+              content: statement.content,
+              topicId: selectedTopic
+            }); 
+          }
         }
 
         setStatements(fetchedStatements);
