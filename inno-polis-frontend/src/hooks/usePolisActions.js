@@ -23,8 +23,8 @@ export const usePolisActions = () => {
     }
   };
 
-  const addStatement = () => {
-    const statement = addStatementService(newStatement, selectedTopic);
+  const addStatement = async (provider) => {
+    const statement = await addStatementService(newStatement, selectedTopic, provider);
     if (statement) {
       setStatements([...statements, statement]);
       setNewStatement('');
