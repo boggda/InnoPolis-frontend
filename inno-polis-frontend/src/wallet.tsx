@@ -5,7 +5,7 @@ import { EthereumPrivateKeyProvider } from "@web3auth/ethereum-provider";
 import { Web3AuthOptions } from "@web3auth/modal";
 import { BUTTON_POSITION, CONFIRMATION_STRATEGY, WalletServicesPlugin } from "@web3auth/wallet-services-plugin";
 
-import { chain } from "./web3.ts";
+import { chain } from "./config/chains.tsx";
 
 //const clientId = "BPi5PB_UiIZ-cPz1GtV5i1I2iOSOHuimiXBI0e-Oe_u6X3oVAbCiAZOTEBtTXw4tsluTITPqA8zMsfxIKMjiqNQ";
 const clientId = 'BGs7ZtLUyzUYJNXA9ZLOpMiIqRT-lsV2kESHIQ3iORck36ugyhUljKi3ts7Qo4XMptv9dAK-EBF2qmm4Z5Lyz-s';
