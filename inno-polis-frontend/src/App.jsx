@@ -38,9 +38,11 @@ function PolisClone() {
   return (
     <div className="polis-clone">
       <h1>InnoPolis</h1>
+      
       <Web3AuthProvider config={web3AuthContextConfig}>
         <WalletServicesProvider context={Web3AuthInnerContext}>
           <ConnectWeb3AuthButton />
+          
           
           <p className="subtitle">Create topics, make statements, vote, and generate reports</p>
 

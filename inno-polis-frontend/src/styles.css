@@ -210,3 +210,26 @@ h2 {
 .submit-votes-button:hover {
   background-color: #45a049;
 }
+
+.web3-connect-btn {
+  float: left;
+  margin: -30px 20px 0 0;
+  height: 18px;
+  padding: 0 6px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 16px;
+  border-radius: 4px;
+}
+
+.web3-connect-btn.connected {
+  background-color: #f0fdf4;
+  border: 1px solid #dcfce7;
+  color: #15803d;
+}
+
+.web3-connect-btn.disconnected {
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  color: #b91c1c;
+}
