@@ -52,7 +52,7 @@ const ReportTab = ({ generateReport }) => {
 
       {showReport && reportStatus && (
         <div className={`report-card ${reportStatus.type}`}>
-          <h3>Report Status</h3>
+          <h3>Report Status for <code className="contract-code">{contractAddress}</code></h3>
           <p>{reportStatus.message}</p>
         </div>
       )}
