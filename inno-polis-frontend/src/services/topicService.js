@@ -24,32 +24,36 @@ export const addTopicService = async (newTopic, newDescription, topics, provider
     const duration = 60*60*24*3; // Example duration in seconds
 
     // Encode the function call
-    const data = contract.methods.createConversation(title, description, authManager, duration).call();
-
-
-    contract.methods.createConversation(title, description, authManager, duration)
-      .send({from: fromAddress, value: 0})
-      .on('transactionHash', (hash) => {
+    return new Promise((resolve, reject) => {
+      contract.methods.createConversation(title, description, authManager, duration)
+        .send({from: fromAddress, value: 0})
+        .on('transactionHash', (hash) => {
           console.log('Transaction Hash:', hash);
-      })
-      .on('receipt', (receipt) => {
+        })
+        .on('receipt', async (receipt) => {
           console.log('Transaction Receipt:', receipt);
-      })
-      .on('error', (error) => {
+          // Get the contract address from the receipt or make a call
+          const contractAddr = await contract.methods.createConversation(title, description, authManager, duration)
+            .call({from: fromAddress});
+          
+          console.log('Contract Address:', contractAddr);
+          
+          const topic = {
+            id: Date.now(),
+            title: newTopic,
+            description: newDescription,
+            contractAddr: contractAddr
+          };
+          
+          resolve(topic);
+        })
+        .on('error', (error) => {
           console.error('Transaction Error:', error);
-      });
-
-      const contractAddr = await contract.methods.createConversation(title, description, authManager, duration)
-        .call({from: fromAddress});
-
-      topic = {
-        id: Date.now(),
-        title: newTopic,
-        description: newDescription,
-        contractAddr: contractAddr
-      };
-      return topic;
+          reject(error);
+        });
+    });
   } catch (error) {
     console.log(error);
+    return null;
   }
 }; 
