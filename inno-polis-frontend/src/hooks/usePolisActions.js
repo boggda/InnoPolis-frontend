@@ -17,8 +17,8 @@ export const usePolisActions = () => {
 
   const [voteArray, setVoteArray] = useState({});
 
-  const addTopic = async (provider) => {
-    const topic = await addTopicService(newTopic, newDescription, topics, provider);
+  const addTopic = async (provider, authType, authAddress, minValue) => {
+    const topic = await addTopicService(newTopic, newDescription, topics, provider, authType, authAddress, minValue);
     if (topic) {
       setTopics([...topics, topic]);
       setNewTopic('');
