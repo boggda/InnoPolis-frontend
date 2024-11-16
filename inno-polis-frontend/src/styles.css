@@ -51,9 +51,9 @@
 }
 
 .network-switch-select {
-  height: 20px;
-  padding: 0 12px 0 4px;
-  font-size: 16px;
+  height: 32px;
+  padding: 0 12px 0 8px;
+  font-size: 14px;
   border-radius: 4px;
   background-color: #fff7ed;
   border: 1px solid #ffedd5;
@@ -65,7 +65,7 @@
   background-repeat: no-repeat;
   background-position: right 4px center;
   background-size: 8px;
-  min-width: 60px;
+  min-width: 160px;
 }
 
 .subtitle {
@@ -116,32 +116,80 @@ h2 {
   display: flex;
   gap: 10px;
   margin: 20px 0;
+  width: 100%;
 }
 
-.contract-address-input {
+input[type="text"] {
   flex: 1;
+  min-width: 0;
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;
+  background-color: white;
 }
 
-.generate-button {
+input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.1);
+}
+
+input[type="text"]:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.input-group button {
   padding: 8px 16px;
   background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  white-space: nowrap;
+  min-width: fit-content;
 }
 
-.generate-button:disabled {
+.input-group button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.input-group button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
 }
 
-.generate-button:hover:not(:disabled) {
-  background-color: #0056b3;
+.topics .input-group {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.statements .topic-address-input {
+  width: 100%;
+}
+
+.report .input-group .contract-address-input {
+  flex: 1;
+}
+
+.requirements-table input[type="text"] {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.requirements-table input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #007bff;
+  display: block;
+  margin: 0 auto;
 }
 
 .report-card {
