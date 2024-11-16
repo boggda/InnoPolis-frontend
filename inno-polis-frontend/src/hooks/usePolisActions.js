@@ -16,6 +16,7 @@ export const usePolisActions = () => {
   const [activeTab, setActiveTab] = useState('topics');
 
   const [voteArray, setVoteArray] = useState({});
+  const [contractAddress, setContractAddress] = useState('');
 
   const addTopic = async (provider, authType, authAddress, minValue) => {
     const topic = await addTopicService(newTopic, newDescription, topics, provider, authType, authAddress, minValue);
@@ -55,26 +56,8 @@ export const usePolisActions = () => {
     
   };
 
-  const generateReport = (topicId) => {
-    const report = generateReportService(topicId, statements);
-    
-    return (
-      <div className="report">
-        <p><strong>Total votes:</strong> {report.totalVotes}</p>
-        <p><strong>Number of statements:</strong> {report.statementsCount}</p>
-        {report.mostAgreed && (
-          <div className="most-agreed">
-            <h4>Most agreed statement:</h4>
-            <p>"{report.mostAgreed.content}"</p>
-            <p>
-              Votes: {report.mostAgreed.votes.agree} agree, 
-              {report.mostAgreed.votes.disagree} disagree, 
-              {report.mostAgreed.votes.skip} skip
-            </p>
-          </div>
-        )}
-      </div>
-    );
+  const generateReport = async (contractAddress, provider) => {
+    return await generateReportService(contractAddress, provider);
   };
 
   return {
@@ -86,6 +69,7 @@ export const usePolisActions = () => {
     selectedTopic,
     currentStatementIndex,
     activeTab,
+    contractAddress,
     
     // Setters
     setNewTopic,
@@ -93,6 +77,7 @@ export const usePolisActions = () => {
     setSelectedTopic,
     setActiveTab,
     setStatements,
+    setContractAddress,
     
     // Actions
     addTopic,
