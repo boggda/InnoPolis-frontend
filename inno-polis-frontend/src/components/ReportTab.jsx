@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useWeb3Auth } from "@web3auth/modal-react-hooks";
+import chainsConfig from "../config/chains.json";
 
 const ReportTab = ({ generateReport }) => {
   const [contractAddress, setContractAddress] = useState('');
