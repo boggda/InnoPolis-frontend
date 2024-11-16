@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@usecapsule/react-sdk": "^4.7.0"
+  }
+}
