@@ -15,6 +15,8 @@ export const usePolisActions = () => {
   const [newDescription, setNewDescription] = useState('');
   const [activeTab, setActiveTab] = useState('topics');
 
+  const [voteArray, setVoteArray] = useState({});
+
   const addTopic = async (provider) => {
     const topic = await addTopicService(newTopic, newDescription, topics, provider);
     if (topic) {
@@ -31,12 +33,26 @@ export const usePolisActions = () => {
     }
   };
 
-  const vote = (voteType) => {
-    const updatedStatements = processVoteService(statements, currentStatementIndex, voteType);
+  const addVote = async (statementId, voteType) => {
+    console.log(statementId, voteType);
+    //const statement = await addStatementService(newStatement, selectedTopic, provider);
+    if (statementId !== null && voteType !== null) {
+      voteArray[statementId] = voteType;
+      console.log(voteArray);
+      setVoteArray(voteArray);
+      setCurrentStatementIndex(prevIndex => prevIndex + 1);
+    }
+  };
+
+
+  const vote = async (provider) => {
+    await processVoteService(voteArray, selectedTopic, provider);
+    /*
     if (updatedStatements) {
       setStatements(updatedStatements);
       setCurrentStatementIndex(prevIndex => prevIndex + 1);
     }
+    */
   };
 
   const generateReport = (topicId) => {
@@ -84,6 +100,7 @@ export const usePolisActions = () => {
     vote,
     generateReport,
     newDescription,
-    setNewDescription
+    setNewDescription,
+    addVote
   };
 }; 

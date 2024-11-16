@@ -195,3 +195,18 @@ h2 {
   color: #6c757d;
   font-size: 14px;
 }
+
+.submit-votes-button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-votes-button:hover {
+  background-color: #45a049;
+}

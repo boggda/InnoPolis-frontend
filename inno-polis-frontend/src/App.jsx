@@ -31,7 +31,8 @@ function PolisClone() {
     vote,
     generateReport,
     newDescription,
-    setNewDescription
+    setNewDescription,
+    addVote
   } = usePolisActions();
 
   return (
@@ -77,6 +78,7 @@ function PolisClone() {
                   currentStatementIndex={currentStatementIndex}
                   statements={statements}
                   vote={vote}
+                  addVote={addVote}
                 />
               </div>
             )}
