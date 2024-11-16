@@ -11,6 +11,7 @@ import ReportTab from './components/ReportTab';
 import NetworkSwitcher from './components/NetworkSwitcher';
 import { usePolisActions } from './hooks/usePolisActions';
 import './styles.css';
+import ConnectCapsuleButton from "./components/ConnectCapsule.jsx";
 
 function PolisClone() {
   const {
