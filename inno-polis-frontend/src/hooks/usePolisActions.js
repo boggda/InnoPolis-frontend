@@ -27,10 +27,10 @@ export const usePolisActions = () => {
 
   const addStatement = async (provider) => {
     const statement = await addStatementService(newStatement, selectedTopic, provider);
-    /*if (statement) {
+    if (statement) {
       setStatements([...statements, statement]);
       setNewStatement('');
-    }*/
+    }
   };
 
   const addVote = async (statementId, voteType) => {
@@ -47,12 +47,12 @@ export const usePolisActions = () => {
 
   const vote = async (provider) => {
     await processVoteService(voteArray, selectedTopic, provider);
-    /*
-    if (updatedStatements) {
-      setStatements(updatedStatements);
-      setCurrentStatementIndex(prevIndex => prevIndex + 1);
-    }
-    */
+    setVoteArray({});
+    //window.location.reload();
+    
+    setStatements([...statements]);
+    setCurrentStatementIndex(0);
+    
   };
 
   const generateReport = (topicId) => {
