@@ -8,6 +8,12 @@ const ReportTab = ({ generateReport }) => {
   const [isLoading, setIsLoading] = useState(false);
   const {isConnected, connect, addAndSwitchChain, userInfo, provider, web3Auth, authenticateUser } = useWeb3Auth();
 
+  // Create chainNames mapping from the chains.json configuration
+  const chainNames = Object.entries(chainsConfig).reduce((acc, [name, config]) => ({
+    ...acc,
+    [config.chainId]: name
+  }), {});
+
   const handleGenerateReport = async () => {
     if (contractAddress) {
       setIsLoading(true);
@@ -16,9 +22,10 @@ const ReportTab = ({ generateReport }) => {
       
       if (result.success) {
         const chainId = await provider.request({ method: 'eth_chainId' });
+        const chainName = chainNames[chainId] || 'baseSepolia';
         setReportStatus({
           type: 'success',
-          url: `${window.location.protocol}//${window.location.hostname}/index_report.html?report_id=${contractAddress}&chain=${chainId}`,
+          url: `${window.location.protocol}//${window.location.hostname}/index_report.html?report_id=${contractAddress}&chain=${chainName}`,
           message: `Report generated successfully!`
         });
       } else {
