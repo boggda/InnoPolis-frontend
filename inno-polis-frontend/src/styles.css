@@ -114,30 +114,41 @@ h2 {
 
 .input-group {
   display: flex;
-  margin-bottom: 15px;
+  gap: 10px;
+  margin: 20px 0;
 }
 
-.input-group input,
-.input-group select {
+.contract-address-input {
   flex: 1;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #bdc3c7;
-  border-radius: 3px;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
 }
 
-.input-group button {
-  padding: 10px 20px;
-  background-color: #2ecc71;
+.generate-button {
+  padding: 8px 16px;
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.input-group button:hover {
-  background-color: #27ae60;
+.generate-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.generate-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.report-card {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .topic-card,

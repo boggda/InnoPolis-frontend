@@ -1,21 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const ReportTab = ({ selectedTopic, setSelectedTopic, topics, generateReport }) => {
+const ReportTab = ({ contractAddress, setContractAddress, generateReport }) => {
+  const [showReport, setShowReport] = useState(false);
+
   return (
     <div className="report">
       <h2>Report</h2>
-      <select
-        onChange={(e) => setSelectedTopic(Number(e.target.value))}
-      >
-        <option value="">Select a topic</option>
-        {topics.map(topic => (
-          <option key={topic.id} value={topic.id}>{topic.title}</option>
-        ))}
-      </select>
-      {selectedTopic && (
+      
+      <div className="input-group">
+        <input
+          type="text"
+          value={contractAddress}
+          onChange={(e) => setContractAddress(e.target.value)}
+          placeholder="Enter contract address"
+          className="contract-address-input"
+        />
+        <button 
+          onClick={generateReport}
+          disabled={!contractAddress}
+          className="generate-button"
+        >
+          Generate Report
+        </button>
+      </div>
+
+      {showReport && contractAddress && (
         <div className="report-card">
-          <h3>Report for {topics.find(t => t.id === selectedTopic)?.title}</h3>
-          {generateReport(selectedTopic)}
+          <h3>Report for Contract: {contractAddress}</h3>
         </div>
       )}
     </div>

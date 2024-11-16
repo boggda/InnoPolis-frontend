@@ -21,11 +21,13 @@ function PolisClone() {
     selectedTopic,
     currentStatementIndex,
     activeTab,
+    contractAddress,
     setNewTopic,
     setNewStatement,
     setSelectedTopic,
     setActiveTab,
     setStatements,
+    setContractAddress,
     addTopic,
     addStatement,
     vote,
@@ -92,9 +94,8 @@ function PolisClone() {
 
             {activeTab === 'report' && (
               <ReportTab 
-                selectedTopic={selectedTopic}
-                setSelectedTopic={setSelectedTopic}
-                topics={topics}
+                contractAddress={contractAddress}
+                setContractAddress={setContractAddress}
                 generateReport={generateReport}
               />
             )}
