@@ -6,6 +6,8 @@ import "@usecapsule/react-sdk/styles.css";
 const ConnectCapsuleButton = () => {
     const capsule = new Capsule(Environment.BETA, '8067d573e393b6070f5d684c7fbc250e');
 
+    console.log("Capsule instance created:", capsule);
+
     const [isOpen, setIsOpen] = useState(false);
     return (
       <div>

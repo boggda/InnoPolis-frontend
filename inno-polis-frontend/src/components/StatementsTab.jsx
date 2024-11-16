@@ -2,11 +2,23 @@ import React, { useEffect, useState } from 'react';
 import {conversationABI} from "../config/abi";
 import Web3 from "web3";
 import { useWeb3Auth } from "@web3auth/modal-react-hooks";
+import { useSearchParams } from 'react-router-dom';
 
 
 const StatementsTab = ({ selectedTopic, setSelectedTopic, newStatement, setNewStatement, addStatement, statements, topics, setStatements }) => {
   const {isConnected, connect, addAndSwitchChain, userInfo, provider, web3Auth, authenticateUser } = useWeb3Auth();
   const [topicDetails, setTopicDetails] = useState({ title: '', description: '', deadline: '' });
+  const [inputValue, setInputValue] = useState('');
+  
+  var url = new URL(window.location.href);
+  const initialAddr = url.searchParams.get("addr");
+
+  useEffect(() => {
+    if (initialAddr) {
+      setInputValue(initialAddr);
+      setSelectedTopic(initialAddr);
+    }
+  }, [initialAddr, setSelectedTopic]);
 
   useEffect(() => {
     let intervalId;    
@@ -87,8 +99,11 @@ const StatementsTab = ({ selectedTopic, setSelectedTopic, newStatement, setNewSt
       <div className="input-group topic-input">
         <input
           type="text"
-          value={selectedTopic || ''}
-          onChange={(e) => setSelectedTopic(e.target.value)}
+          value={inputValue}
+          onChange={(e) => {
+            setInputValue(e.target.value);
+            setSelectedTopic(e.target.value);
+          }}
           placeholder="Enter topic address"
           className="topic-address-input"
         />

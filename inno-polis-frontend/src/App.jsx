@@ -40,7 +40,6 @@ function PolisClone() {
 
   return (
     <div className="polis-clone">
-      
       <Web3AuthProvider config={web3AuthContextConfig}>
         <WalletServicesProvider context={Web3AuthInnerContext}>
         <div className="header">
