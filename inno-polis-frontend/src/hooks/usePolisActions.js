@@ -76,6 +76,7 @@ export const usePolisActions = () => {
     setNewStatement,
     setSelectedTopic,
     setActiveTab,
+    setStatements,
     
     // Actions
     addTopic,

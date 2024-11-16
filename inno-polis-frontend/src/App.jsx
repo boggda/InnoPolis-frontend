@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Web3AuthProvider } from "@web3auth/modal-react-hooks";
 import { WalletServicesProvider } from "@web3auth/wallet-services-plugin-react-hooks";
 import { Web3AuthInnerContext } from "@web3auth/modal-react-hooks";
@@ -25,6 +25,7 @@ function PolisClone() {
     setNewStatement,
     setSelectedTopic,
     setActiveTab,
+    setStatements,
     addTopic,
     addStatement,
     vote,
@@ -32,8 +33,6 @@ function PolisClone() {
     newDescription,
     setNewDescription
   } = usePolisActions();
-
-  
 
   return (
     <div className="polis-clone">
@@ -71,6 +70,7 @@ function PolisClone() {
                   setNewStatement={setNewStatement}
                   addStatement={addStatement}
                   statements={statements}
+                  setStatements={setStatements}
                   topics={topics}
                 />
                 <VoteTab 

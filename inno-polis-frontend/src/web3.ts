@@ -25,7 +25,7 @@ export const chain: {
   },
   holesky: {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
-    chainId: "0xaa36a7",
+    chainId: "0x4268",
     displayName: "Ethereum Holesky",
     tickerName: "Ethereum",
     ticker: "ETH",
