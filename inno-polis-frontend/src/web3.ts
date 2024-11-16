@@ -23,6 +23,16 @@ export const chain: {
     blockExplorerUrl: "https://sepolia.etherscan.io",
     logo: "https://web3auth.io/images/web3authlog.png",
   },
+  holesky: {
+    chainNamespace: CHAIN_NAMESPACES.EIP155,
+    chainId: "0xaa36a7",
+    displayName: "Ethereum Holesky",
+    tickerName: "Ethereum",
+    ticker: "ETH",
+    rpcTarget: "https://rpc.ankr.com/eth_holesky",
+    blockExplorerUrl: "https://holesky.etherscan.io",
+    logo: "https://web3auth.io/images/web3authlog.png",
+  },
   polygon: {
     chainNamespace: CHAIN_NAMESPACES.EIP155,
     chainId: "0x89", // hex of 137, polygon mainnet

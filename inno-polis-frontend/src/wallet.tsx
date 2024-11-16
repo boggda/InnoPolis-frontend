@@ -12,12 +12,12 @@ const clientId = 'BGs7ZtLUyzUYJNXA9ZLOpMiIqRT-lsV2kESHIQ3iORck36ugyhUljKi3ts7Qo4
 
 const privateKeyProvider = new EthereumPrivateKeyProvider({
   config: {
-    chainConfig: chain.ethereum,
+    chainConfig: chain.holesky,
   },
 });
 
 const web3AuthOptions: Web3AuthOptions = {
-  chainConfig: chain.ethereum,
+  chainConfig: chain.holesky,
   clientId,
   web3AuthNetwork: WEB3AUTH_NETWORK.SAPPHIRE_DEVNET,
   privateKeyProvider,
