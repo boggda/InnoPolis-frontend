@@ -21,17 +21,18 @@ const StatementsTab = ({ selectedTopic, setSelectedTopic, newStatement, setNewSt
 
         const statementsCount = await topicContract.methods.statementCount().call();
         const fetchedStatements = [];
+        const votes = await topicContract.methods.getVotesData(fromAddress).call();
 
         for (let i = 0; i < statementsCount; i++) {
           const statement = await topicContract.methods.statements(i).call();
-          const vote = await topicContract.methods.getVotesData(fromAddress).call();
-          console.log("Vote:", vote);
-          if (vote < 1) {
-            fetchedStatements.push({
-              id: i,
-              content: statement.content,
-              topicId: selectedTopic
-            }); 
+          for (let j = 0; j < votes.length; j++) {
+            if (votes[j].statementId !== i) {
+              fetchedStatements.push({
+                id: i,
+                content: statement.content,
+                topicId: selectedTopic
+              }); 
+            }
           }
         }
 
