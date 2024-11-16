@@ -1,6 +1,6 @@
 import Web3 from "web3";
 import {conversationFactoryABI} from "../config/abi";
-import {factoryAddr} from "../config/const"
+import {factoryAddrList} from "../config/const"
 
 export const addTopicService = async (newTopic, newDescription, topics, provider, authType, authAddress, minValue) => {
   if (!newTopic.trim()) {
@@ -9,6 +9,9 @@ export const addTopicService = async (newTopic, newDescription, topics, provider
   try {
     const web3 = new Web3(provider);
     const fromAddress = (await web3.eth.getAccounts())[0];
+    const chainId = Number(await provider.request({ method: 'eth_chainId' }));
+    const factoryAddr = factoryAddrList[chainId];
+    console.log("factoryAddr", factoryAddr);
     const contract = new web3.eth.Contract(conversationFactoryABI, factoryAddr);
 
     let calls = [];
