@@ -1,7 +1,7 @@
 import "../config/abi"
 
 export const addStatementService = async (newStatement, selectedTopic) => {
-  if (!newStatement.trim() || selectedTopic === null) {
+  if (!newStatement.trim() || !selectedTopic.trim()) {
     return null;
   }
 

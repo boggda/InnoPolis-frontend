@@ -10,7 +10,7 @@ export const usePolisActions = () => {
   const [statements, setStatements] = useState([]);
   const [newTopic, setNewTopic] = useState('');
   const [newStatement, setNewStatement] = useState('');
-  const [selectedTopic, setSelectedTopic] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState('');
   const [currentStatementIndex, setCurrentStatementIndex] = useState(0);
   const [newDescription, setNewDescription] = useState('');
   const [activeTab, setActiveTab] = useState('topics');

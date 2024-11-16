@@ -5,15 +5,12 @@ const StatementsTab = ({ selectedTopic, setSelectedTopic, newStatement, setNewSt
     <div className="statements">
       <h2>Statements</h2>
       <div className="input-group">
-        <select
+        <input
+          type="text"
           value={selectedTopic || ''}
-          onChange={(e) => setSelectedTopic(Number(e.target.value))}
-        >
-          <option value="">Select a topic</option>
-          {topics.map(topic => (
-            <option key={topic.id} value={topic.id}>{topic.title}</option>
-          ))}
-        </select>
+          onChange={(e) => setSelectedTopic(e.target.value)}
+          placeholder="Enter topic address"
+        />
         <input
           type="text"
           value={newStatement}
