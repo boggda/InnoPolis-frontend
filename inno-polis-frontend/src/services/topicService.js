@@ -32,9 +32,8 @@ export const addTopicService = async (newTopic, newDescription, topics, provider
         })
         .on('receipt', async (receipt) => {
           console.log('Transaction Receipt:', receipt);
-          // Get the contract address from the receipt or make a call
-          const contractAddr = await contract.methods.createConversation(title, description, authManager, duration)
-            .call({from: fromAddress});
+          // Get the contract address from the receipt events
+          const contractAddr = receipt.events.ConversationCreated.returnValues.conversationAddress;
           
           console.log('Contract Address:', contractAddr);
           
