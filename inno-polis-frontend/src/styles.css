@@ -169,3 +169,29 @@ h2 {
   padding-bottom: 20px;
   border-bottom: 1px solid #ecf0f1;
 }
+
+.topic-details {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.topic-details h1 {
+  margin: 0 0 15px 0;
+  font-size: 24px;
+  color: #212529;
+}
+
+.topic-details .description {
+  margin: 0 0 10px 0;
+  color: #495057;
+  line-height: 1.5;
+}
+
+.topic-details .deadline {
+  margin: 0;
+  color: #6c757d;
+  font-size: 14px;
+}

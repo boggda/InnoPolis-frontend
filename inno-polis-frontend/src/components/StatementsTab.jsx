@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {conversationABI} from "../config/abi";
 import Web3 from "web3";
 import { useWeb3Auth } from "@web3auth/modal-react-hooks";
@@ -6,6 +6,7 @@ import { useWeb3Auth } from "@web3auth/modal-react-hooks";
 
 const StatementsTab = ({ selectedTopic, setSelectedTopic, newStatement, setNewStatement, addStatement, statements, topics, setStatements }) => {
   const {isConnected, connect, addAndSwitchChain, userInfo, provider, web3Auth, authenticateUser } = useWeb3Auth();
+  const [topicDetails, setTopicDetails] = useState({ title: '', description: '', deadline: '' });
 
   useEffect(() => {
     let intervalId;    
@@ -26,7 +27,12 @@ const StatementsTab = ({ selectedTopic, setSelectedTopic, newStatement, setNewSt
           fetchedStatements.push({
             id: i,
             content: statement.content,
-            topicId: selectedTopic
+            topicId: selectedTopic,
+            votes: {
+              agree: 0,
+              disagree: 0,
+              skip: 0
+            }
           });
         }
 
@@ -36,9 +42,32 @@ const StatementsTab = ({ selectedTopic, setSelectedTopic, newStatement, setNewSt
       }
     };
 
+    const fetchTopicDetails = async () => {
+      try {
+        const web3 = new Web3(provider);
+        const topicContract = new web3.eth.Contract(
+          conversationABI,
+          selectedTopic
+        );
+
+        const title = await topicContract.methods.title().call();
+        const description = await topicContract.methods.description().call();
+        const deadline = await topicContract.methods.deadline().call();
+
+        setTopicDetails({
+          title,
+          description,
+          deadline: new Date(Number(deadline) * 1000).toLocaleString() // Convert Unix timestamp to readable date
+        });
+      } catch (error) {
+        console.error('Error fetching topic details:', error);
+      }
+    };
+
     if (selectedTopic && provider) {
       fetchTopicStatements();
-      intervalId = setInterval(fetchTopicStatements, 5000);
+      fetchTopicDetails();
+      intervalId = setInterval(fetchTopicStatements, 1000);
     }
 
     return () => {
@@ -50,14 +79,24 @@ const StatementsTab = ({ selectedTopic, setSelectedTopic, newStatement, setNewSt
 
   return (
     <div className="statements">
-      <h2>Statements</h2>
-      <div className="input-group">
+      <div className="input-group topic-input">
         <input
           type="text"
           value={selectedTopic || ''}
           onChange={(e) => setSelectedTopic(e.target.value)}
           placeholder="Enter topic address"
+          className="topic-address-input"
         />
+      </div>
+      {selectedTopic && topicDetails.title && (
+        <div className="topic-details">
+          <h1>{topicDetails.title}</h1>
+          <p className="description">{topicDetails.description}</p>
+          <p className="deadline">Deadline: {topicDetails.deadline}</p>
+        </div>
+      )}
+      <h2>Statements</h2>
+      <div className="input-group">
         <input
           type="text"
           value={newStatement}
@@ -65,14 +104,6 @@ const StatementsTab = ({ selectedTopic, setSelectedTopic, newStatement, setNewSt
           placeholder="Enter a new statement"
         />
         <button onClick={() => addStatement(provider)}>Add Statement</button>
-      </div>
-      <div className="statement-list">
-        {statements.map(statement => (
-          <div key={statement.id} className="statement-card">
-            <p>{statement.content}</p>
-            <p className="topic-label">Topic: {topics.find(t => t.id === statement.topicId)?.title}</p>
-          </div>
-        ))}
       </div>
     </div>
   );
