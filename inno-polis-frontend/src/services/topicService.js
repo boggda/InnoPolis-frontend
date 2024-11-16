@@ -6,12 +6,7 @@ export const addTopicService = async (newTopic, newDescription, topics, provider
   if (!newTopic.trim()) {
     return null;
   }
-
-
-  let topic;
-  let result;
   try {
-    console.log(provider);
     const web3 = new Web3(provider);
     // Get user's Ethereum public address
     //console.log(await web3.eth.getAccounts());
@@ -56,4 +51,4 @@ export const addTopicService = async (newTopic, newDescription, topics, provider
     console.log(error);
     return null;
   }
-}; 
+};

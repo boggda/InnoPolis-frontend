@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { Web3AuthProvider } from "@web3auth/modal-react-hooks";
 import { WalletServicesProvider } from "@web3auth/wallet-services-plugin-react-hooks";
 import { Web3AuthInnerContext } from "@web3auth/modal-react-hooks";
