@@ -1,33 +1,16 @@
 import { backendUrl } from "../config/const";
+import chainsConfig from "../config/chains.json";
+
+// Create chainNames mapping from the chains.json configuration
+const chainNames = Object.entries(chainsConfig).reduce((acc, [name, config]) => ({
+  ...acc,
+  [config.chainId]: name
+}), {});
 
 export const generateReportService = async (contractAddress, provider) => {
   try {
     const chainId = await provider.request({ method: 'eth_chainId' });
-    
-    // Map chain IDs to network names
-    const chainNames = {
-      '0x1': 'mainnet',           // Ethereum Mainnet
-      '0xaa36a7': 'sepolia',      // Sepolia
-      '0x4268': 'holesky',        // Holesky
-      '0x89': 'polygon',          // Polygon Mainnet
-      '0x13882': 'polygon_amoy',  // Polygon Amoy Testnet
-      '0x14A34': 'base_sepolia',  // Base Sepolia
-      '0x38': 'bnb',             // Binance Smart Chain
-      '0xA86A': 'avalanche',     // Avalanche
-      '0xA4B1': 'arbitrum',      // Arbitrum
-      '0xA': 'optimism',         // Optimism
-      '0x19': 'cronos',          // Cronos
-      '0x63564c40': 'harmony',   // Harmony
-      '0xa4ec': 'celo',          // Celo
-      '0x504': 'moonbeam',       // Moonbeam
-      '0x505': 'moonriver',      // Moonriver
-      '0x2019': 'klaytn',        // Klaytn
-      '0xE': 'flare',           // Flare
-      '0x13': 'songbird',       // Songbird
-      '0x133E40': 'zkatana'     // zKatana Testnet
-    };
-    
-    const chainName = chainNames[chainId] || 'base_sepolia'; // default to holesky if chain not found
+    const chainName = chainNames[chainId] || 'baseSepolia'; // default to baseSepolia if chain not found
 
     const response = await fetch(
       `${backendUrl}/api/v3/create_report?report_id=${contractAddress}&chain=${chainName}`,
