@@ -9,6 +9,7 @@ import TopicsTab from './components/TopicsTab';
 import StatementsTab from './components/StatementsTab';
 import VoteTab from './components/VoteTab';
 import ReportTab from './components/ReportTab';
+import NetworkSwitcher from './components/NetworkSwitcher';
 import { usePolisActions } from './hooks/usePolisActions';
 import './styles.css';
 
@@ -37,11 +38,16 @@ function PolisClone() {
 
   return (
     <div className="polis-clone">
-      <h1>InnoPolis</h1>
       
       <Web3AuthProvider config={web3AuthContextConfig}>
         <WalletServicesProvider context={Web3AuthInnerContext}>
-          <ConnectWeb3AuthButton />
+        <div className="header">
+          <h1>InnoPolis</h1>
+          <div className="auth-controls">
+            <NetworkSwitcher />
+            <ConnectWeb3AuthButton />
+          </div>
+        </div>
           
           
           <p className="subtitle">Create topics, make statements, vote, and generate reports</p>
