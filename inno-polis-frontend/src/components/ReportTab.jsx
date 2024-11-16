@@ -1,7 +1,33 @@
 import React, { useState } from 'react';
+import { useWeb3Auth } from "@web3auth/modal-react-hooks";
 
-const ReportTab = ({ contractAddress, setContractAddress, generateReport }) => {
+const ReportTab = ({ generateReport }) => {
+  const [contractAddress, setContractAddress] = useState('');
   const [showReport, setShowReport] = useState(false);
+  const [reportStatus, setReportStatus] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const {isConnected, connect, addAndSwitchChain, userInfo, provider, web3Auth, authenticateUser } = useWeb3Auth();
+
+  const handleGenerateReport = async () => {
+    if (contractAddress) {
+      setIsLoading(true);
+      const result = await generateReport(contractAddress, provider);
+      setIsLoading(false);
+      
+      if (result.success) {
+        setReportStatus({
+          type: 'success',
+          message: `Report generated successfully! Conversation ID: ${result.conversationId}`
+        });
+      } else {
+        setReportStatus({
+          type: 'error',
+          message: `Failed to generate report: ${result.error}`
+        });
+      }
+      setShowReport(true);
+    }
+  };
 
   return (
     <div className="report">
@@ -16,17 +42,18 @@ const ReportTab = ({ contractAddress, setContractAddress, generateReport }) => {
           className="contract-address-input"
         />
         <button 
-          onClick={generateReport}
-          disabled={!contractAddress}
+          onClick={handleGenerateReport}
+          disabled={!contractAddress || isLoading}
           className="generate-button"
         >
-          Generate Report
+          {isLoading ? 'Generating...' : 'Generate Report'}
         </button>
       </div>
 
-      {showReport && contractAddress && (
-        <div className="report-card">
-          <h3>Report for Contract: {contractAddress}</h3>
+      {showReport && reportStatus && (
+        <div className={`report-card ${reportStatus.type}`}>
+          <h3>Report Status</h3>
+          <p>{reportStatus.message}</p>
         </div>
       )}
     </div>

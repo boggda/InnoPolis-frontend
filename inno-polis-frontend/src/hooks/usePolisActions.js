@@ -56,8 +56,8 @@ export const usePolisActions = () => {
     
   };
 
-  const generateReport = (topicId) => {
-    const report = generateReportService(contractAddress);
+  const generateReport = async (contractAddress, provider) => {
+    return await generateReportService(contractAddress, provider);
   };
 
   return {
