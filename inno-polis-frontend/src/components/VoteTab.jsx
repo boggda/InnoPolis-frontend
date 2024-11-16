@@ -27,6 +27,11 @@ const VoteTab = ({ currentStatementIndex, statements, vote, addVote }) => {
       >
         Submit All Votes
       </button>
+      <div className="vote-reminder">
+        <h3 style={{ color: 'red', textAlign: 'center', padding: '10px' }}>
+          ⚠️ DO NOT FORGET TO SUBMIT YOUR VOTES! ⚠️
+        </h3>
+      </div>
     </div>
   );
 };
