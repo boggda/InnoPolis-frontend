@@ -13,9 +13,9 @@ const VoteTab = ({ currentStatementIndex, statements, vote, addVote }) => {
           <h3>Statement to Vote On</h3>
           <p>{statements[currentStatementIndex].content}</p>
           <div className="vote-buttons">
-            <button className="agree" onClick={() => addVote(currentStatementIndex, 1)}>Agree</button>
-            <button className="disagree" onClick={() => addVote(currentStatementIndex, 2)}>Disagree</button>
-            <button className="skip" onClick={() => addVote(currentStatementIndex, 0)}>Skip</button>
+            <button className="agree" onClick={() => addVote(statements[currentStatementIndex].id, 1)}>Agree</button>
+            <button className="disagree" onClick={() => addVote(statements[currentStatementIndex].id, 2)}>Disagree</button>
+            <button className="skip" onClick={() => addVote(statements[currentStatementIndex].id, 0)}>Skip</button>
           </div>
         </div>
       ) : (

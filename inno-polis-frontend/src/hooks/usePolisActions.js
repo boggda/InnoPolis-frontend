@@ -27,10 +27,10 @@ export const usePolisActions = () => {
 
   const addStatement = async (provider) => {
     const statement = await addStatementService(newStatement, selectedTopic, provider);
-    if (statement) {
+    /*if (statement) {
       setStatements([...statements, statement]);
       setNewStatement('');
-    }
+    }*/
   };
 
   const addVote = async (statementId, voteType) => {
