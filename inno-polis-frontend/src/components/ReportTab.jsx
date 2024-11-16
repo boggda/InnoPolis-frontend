@@ -15,9 +15,11 @@ const ReportTab = ({ generateReport }) => {
       setIsLoading(false);
       
       if (result.success) {
+        const chainId = await provider.request({ method: 'eth_chainId' });
         setReportStatus({
           type: 'success',
-          message: `Report generated successfully! Conversation ID: ${result.conversationId}`
+          url: `${window.location.protocol}//${window.location.hostname}/index_report.html?report_id=${contractAddress}&chain=${chainId}`,
+          message: `Report generated successfully!`
         });
       } else {
         setReportStatus({
@@ -52,8 +54,15 @@ const ReportTab = ({ generateReport }) => {
 
       {showReport && reportStatus && (
         <div className={`report-card ${reportStatus.type}`}>
-          <h3>Report Status</h3>
-          <p>{reportStatus.message}</p>
+          <h3>Report Status for <code className="contract-code">{contractAddress}</code></h3>
+          <a 
+            href={reportStatus.url || '#'} 
+            className="text-blue-600 hover:text-blue-800 underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {reportStatus.message}
+          </a>
         </div>
       )}
     </div>

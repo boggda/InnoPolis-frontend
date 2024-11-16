@@ -410,3 +410,14 @@ input[type="text"]:disabled {
   margin: 0 auto;
 }
 
+.contract-code {
+  background-color: #f6f8fa;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+  color: #24292f;
+  border: 1px solid #e1e4e8;
+  word-break: break-all;
+}
+
