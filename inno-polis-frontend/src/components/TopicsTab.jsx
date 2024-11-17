@@ -100,7 +100,7 @@ const TopicsTab = ({ newTopic, setNewTopic, newDescription, setNewDescription, a
               <td><input 
                 type="text" 
                 placeholder="Address" 
-                value={authAddresses.chiliz}
+                value="0xc2661815c69c2b3924d3dd0c2c1358a1e38a3105"
                 onChange={(e) => handleAuthAddressChange('chiliz', e.target.value)}
                 disabled={selectedAuth !== 'chiliz'}
               /></td>
